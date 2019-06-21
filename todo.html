@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=375, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>todoList</title>
+    <link rel="stylesheet" href="todo.css" type="text/css"/>
+</head>
+<body>
+<div id="main">
+    <h1>TODO</h1>
+    <div id="panel">
+        <div id="input">
+            <label for="todo"></label>
+            <input id="todo" type="text" placeholder="to do something" autofocus="autofocus" maxlength="15"/>
+            <div id="add" class="todo-button">Add</div>
+        </div>
+        <div id="bottom">
+            <span id="active">No items left</span>
+            <div id="control">
+                <span id="show-all" class="item-type-active">All</span>
+                <span id="show-active" class="item-type">Active</span>
+                <span id="show-completed" class="item-type">Completed</span>
+            </div>
+        </div>
+        <div id="list">
+            <div class="list-item" id="nothing">
+                <div class="todo-item">
+                    <span class="todo-text">Nothing Here</span>
+                </div>
+            </div>
+        </div>
+        <button id="clear">Clear All Completed</button>
+    </div>
+</div>
+<script src="model.js"></script>
+<script src="provider-localStorage.js"></script>
+<script src="todo.js"></script>
+</body>
+</html>
