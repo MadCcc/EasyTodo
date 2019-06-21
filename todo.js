@@ -15,6 +15,8 @@
         let showActive = $("show-active");
         let showCompleted = $("show-completed");
         let clear = $("clear");
+        let doButton = $("do");
+        let undoButton = $("undo");
         add.addEventListener("touchend", addTodoItem);
         add.addEventListener("touchstart", function(){
             add.style.backgroundColor = "rgba(100, 149, 237, 0.52)";
@@ -35,6 +37,20 @@
             clearCompleted();
             clear.style.backgroundColor = "cornflowerblue";
         });
+        doButton.addEventListener("touchstart", function(){
+            doButton.style.backgroundColor = "rgba(100, 149, 237, 0.52)";
+        });
+        doButton.addEventListener("touchend", function(){
+            doItems(true);
+            doButton.style.backgroundColor = "cornflowerblue";
+        });
+        undoButton.addEventListener("touchstart", function(){
+            undoButton.style.backgroundColor = "rgba(100, 149, 237, 0.52)";
+        });
+        undoButton.addEventListener("touchend", function(){
+            doItems(false);
+            undoButton.style.backgroundColor = "cornflowerblue";
+        });
 
         model.init(function(){
             data = model.data;
@@ -46,6 +62,25 @@
         });
         update();
     };
+
+    function doItems(completed){
+        let list = $("list");
+        let i = 0, len;
+        let child = list.firstChild;
+        len = list.childElementCount - 1;
+        while(i < len) {
+            let next = child.nextSibling;
+
+            data.items[i].completed = completed;
+            model.flush();
+            child.firstElementChild.firstElementChild.className = completed ? "recoverButton" : "completeButton";
+            child.firstElementChild.firstElementChild.nextElementSibling.className = completed ? "todo-text-done" : "todo-text";
+            i++;
+            child = next;
+        }
+        activeItem = completed ? 0 : allItem;
+        update();
+    }
 
     function clearCompleted(){
         let list = $("list");
@@ -268,47 +303,6 @@
             });
             text.addEventListener("touchend", function(){
                 clearTimeout(timeOutEvent);
-                // if(timeOutEvent !== 0 && longClick === 1 && completeButton.className === "completeButton"){
-                //     item.className += "-editing";
-                //     node.className += "-editing";
-                //     var edit = document.createElement("input");
-                //     edit.className = "edit";
-                //     edit.type = "text";
-                //     edit.value = text.innerHTML;
-                //     edit.placeholder = text.innerHTML;
-                //     edit.maxLength = "15";
-                //
-                //     // noinspection JSAnnotator
-                //     function finish(){
-                //         item.className = "todo-item";
-                //         node.className = "list-item";
-                //         node.removeChild(edit);
-                //         node.removeChild(save);
-                //     }
-                //
-                //     edit.addEventListener("blur", finish);
-                //
-                //     var save = document.createElement("div");
-                //     save.className = "todo-button";
-                //     save.innerHTML = "Save";
-                //     save.addEventListener("touchend", function () {
-                //         if(edit.value) {
-                //             text.innerHTML = edit.value;
-                //             data.items[findIndex(list, node)].msg = edit.value;
-                //             model.flush();
-                //         }
-                //         item.className = "todo-item";
-                //         node.className = "list-item";
-                //         edit.style.display = "none";
-                //         save.style.display = "none";
-                //     });
-                //
-                //     node.appendChild(edit);
-                //     node.appendChild(save);
-                //     edit.focus();
-                // }
-                // longClick = 0;
-                // return false;
             });
             activeItem += (stItem && stItem.completed) ? 0 : 1;
             allItem++;
@@ -326,5 +320,6 @@
     function updateActiveItem() {
         $("active").innerHTML = (activeItem !== 0 ? activeItem : "No") + " items left";
         $("bottom").style.display = allItem !== 0 ? "block" : "none";
+        $("do-undo").style.display = allItem !== 0 ? "block" : "none";
     }
 })();

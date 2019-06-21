@@ -278,3 +278,25 @@ input::-webkit-input-placeholder {
     -webkit-tap-highlight-color:transparent;
     outline: none;
 }
+
+.do{
+    /*display: none;*/
+    margin-top: 20px;
+    width: 160px;
+    height: 50px;
+    background-color: cornflowerblue;
+    color: #fff;
+    border-radius: 10px 10px 10px 10px;
+    border: none;
+    font-size: 15pt;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color:transparent;
+    outline: none;
+}
+
+#undo{
+    margin-left: 27px;
+}
