@@ -1,4 +1,4 @@
-# Web-Program
+# EasyTodo
 1.使用localStorage进行存储，保存页面状态，刷新页面后可恢复<br/>
 2.包含新增、删除、展现列表、全部完成/取消、删除已完成功能<br/>
 3.长按列表未完成的事项可以编辑,清空内容后会有原内容的placeholder<br/>
